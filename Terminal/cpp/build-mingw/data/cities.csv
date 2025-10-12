@@ -1,0 +1,21 @@
+name,country,lat,lon,tz
+Riyadh,Saudi Arabia,24.7136,46.6753,+03:00
+Makkah,Saudi Arabia,21.3891,39.8579,+03:00
+Jeddah,Saudi Arabia,21.4858,39.1925,+03:00
+Cairo,Egypt,30.0444,31.2357,+02:00
+Dubai,United Arab Emirates,25.2048,55.2708,+04:00
+Doha,Qatar,25.2854,51.5310,+03:00
+Kuwait City,Kuwait,29.3759,47.9774,+03:00
+Istanbul,Turkey,41.0082,28.9784,+03:00
+Jakarta,Indonesia,-6.2088,106.8456,+07:00
+Karachi,Pakistan,24.8607,67.0011,+05:00
+Tehran,Iran,35.6892,51.3890,+03:30
+Kuala Lumpur,Malaysia,3.1390,101.6869,+08:00
+London,United Kingdom,51.5074,-0.1278,+00:00
+Paris,France,48.8566,2.3522,+01:00
+New York,USA,40.7128,-74.0060,-05:00
+Toronto,Canada,43.651070,-79.347015,-05:00
+Sydney,Australia,-33.8688,151.2093,+10:00
+Moscow,Russia,55.7558,37.6173,+03:00
+Tunis,Tunisia,36.8065,10.1815,+01:00
+Algiers,Algeria,36.7538,3.0588,+01:00

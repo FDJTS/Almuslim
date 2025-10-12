@@ -1,0 +1,44 @@
+# Al-Muslim configuration sample (copy to ~/.al-muslim/config.toml)
+# Lines starting with # are comments.
+
+[location]
+# Descriptive city name (optional but nice for display)
+city = "Riyadh"
+# Decimal degrees; positive = North/East, negative = South/West
+latitude = 24.7136
+longitude = 46.6753
+# Olson/IANA timezone name; if omitted, app tries to detect from system
+# Example: "Asia/Riyadh", "Europe/London", "America/New_York"
+timezone = "Asia/Riyadh"
+
+[calculation]
+# Prayer time calculation method
+# One of: mwl, isna, umm_al_qura, egypt, karachi, makkah, tehran, kuwait,
+#         qatar, singapore, turkey, france, russia, gulf, diyanet
+method = "umm_al_qura"
+# Madhab affects Asr calculation: shafi or hanafi
+madhab = "shafi"
+# High latitude rule for regions with very short nights
+# One of: middle_of_the_night, seventh_of_the_night, twilight_angle
+high_latitude_rule = "middle_of_the_night"
+# Optional custom angles (degrees) if you use a custom method
+# fajr_angle = 18.0
+# isha_angle = 18.0
+
+[ui]
+# Language code: en, ar (more can be added)
+language = "en"
+# 24-hour clock (true) or 12-hour clock (false)
+24h = true
+# Color theme: auto, light, dark
+colors = "auto"
+
+[updates]
+# Check for updates in the background (non-blocking)
+auto_check = true
+# Release channel: stable or beta
+channel = "stable"
+
+[paths]
+# Optional: override the default config dir; ALMUSLIM_CONFIG env var takes precedence
+# config_dir = "C:/Users/you/.al-muslim"

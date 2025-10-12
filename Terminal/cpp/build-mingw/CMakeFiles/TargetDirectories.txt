@@ -1,0 +1,7 @@
+E:/Zyad/Scripts/Ma shitty projects/Almuslim/Terminal/cpp/build-mingw/CMakeFiles/al-muslim.dir
+E:/Zyad/Scripts/Ma shitty projects/Almuslim/Terminal/cpp/build-mingw/CMakeFiles/edit_cache.dir
+E:/Zyad/Scripts/Ma shitty projects/Almuslim/Terminal/cpp/build-mingw/CMakeFiles/rebuild_cache.dir
+E:/Zyad/Scripts/Ma shitty projects/Almuslim/Terminal/cpp/build-mingw/CMakeFiles/list_install_components.dir
+E:/Zyad/Scripts/Ma shitty projects/Almuslim/Terminal/cpp/build-mingw/CMakeFiles/install.dir
+E:/Zyad/Scripts/Ma shitty projects/Almuslim/Terminal/cpp/build-mingw/CMakeFiles/install/local.dir
+E:/Zyad/Scripts/Ma shitty projects/Almuslim/Terminal/cpp/build-mingw/CMakeFiles/install/strip.dir
