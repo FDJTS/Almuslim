@@ -1,312 +1,145 @@
-# Al‑Muslim — Terminal Prayer & Hijri App
+# Al‑Muslim — Fast C++ Terminal Prayer Times
 
-A beautiful, cross‑platform terminal app for prayer times and the Hijri calendar — fast, offline‑capable, and deployable on Windows/macOS/Linux terminals.
+Al‑Muslim is a fast, offline, cross‑platform terminal app that shows today’s prayer times (Fajr, Sunrise, Dhuhr, Asr, Maghrib, Isha) and a next‑prayer countdown. It’s implemented in portable C++17 and ships with per‑OS scripts plus a Windows installer.
 
-- Clean, modern TUI that works in PowerShell, Windows Terminal, Terminal.app, iTerm2, bash, zsh — even over SSH.
-- Shows today’s Gregorian date, Hijri (Umm al‑Qura) date, sunrise/sunset, and the five daily prayers (Fajr, Dhuhr, Asr, Maghrib, Isha) with a next‑prayer countdown.
-- Configurable calculation method (MWL, ISNA, Umm al‑Qura, etc.), madhab (Shafi/Hanafi), high‑latitude rules, language, and timezone.
-- Fully offline after first install; optional lightweight update checker.
-- Cross‑platform packaging with PyInstaller for one‑file binaries (Windows .exe, macOS .app/.dmg, Linux AppImage).
+- Accurate solar math (NOAA‑style) with common methods (MWL, ISNA, Umm al‑Qura, Egypt, Karachi, Tehran), Shafi/Hanafi Asr, and high‑latitude rules.
+- Works on Windows, macOS, and Linux terminals; no runtime dependencies after build/install.
+- Simple interactive setup to pick your city from a built‑in database.
 
-> Note: This repository’s Terminal app lives under `Terminal/` (with OS subfolders). The GUI shells under `App/` are independent.
+Folders of interest:
 
-
-## Quick start
-
-### End users (pip install from GitHub)
-
-Install directly from your GitHub fork (replace <you> with your username or org):
-
-```powershell
-# PowerShell (Windows)
-python -m pip install --upgrade pip
-pip install "git+https://github.com/<you>/al-muslim.git"
-```
-
-```bash
-# macOS / Linux (bash/zsh)
-python3 -m pip install --upgrade pip
-pip3 install "git+https://github.com/<you>/al-muslim.git"
-```
-
-Run the app:
-
-```powershell
-al-muslim
-```
-
-- The command is typically `al-muslim` on all platforms. If your environment renames entry points, you may see `al-muslim.exe` on Windows.
-
-Optional: install via pipx to keep it isolated from your global Python:
-
-```powershell
-pip install pipx
-pipx install "git+https://github.com/<you>/al-muslim.git"
-```
-
-### End users (download a binary)
-
-Download the latest release for your OS from GitHub Releases:
-
-- Windows: `Al-Muslim-x.y.z-windows-amd64.exe`
-- macOS: `Al-Muslim-x.y.z-macos-universal.app.zip` or `.dmg`
-- Linux: `Al-Muslim-x.y.z-linux-amd64.AppImage`
-
-Then run it from your terminal. No Python required.
+- Terminal/cpp — C++ source, CMake, data (cities.csv)
+- Terminal/Windows — build/run scripts, Inno Setup installer
+- Terminal/MacOS and Terminal/Linux — build/run scripts
+- App/ — other shells (independent of the CLI)
 
 
-## Features
+## Quick start (Windows)
 
-- TUI built with Textual/Rich for a crisp, accessible terminal UI with colors, layout, and keyboard hints.
-- Prayer times: Fajr, Sunrise, Dhuhr, Asr, Maghrib, Isha.
-- Hijri date (Umm al‑Qura).
-- Next‑prayer countdown and highlights.
-- Configurable calculation method (MWL, ISNA, Umm al‑Qura, etc.), madhab (Shafi/Hanafi), high‑latitude rules.
-- Timezone/user locale handling.
-- Offline use after install; the app calculates prayer times locally and uses system time.
-- Optional update check (non‑blocking, can be disabled in config).
+Option A — Installer (recommended for users):
+
+1) Download Almuslim‑Setup‑X.Y.Z.exe from GitHub Releases (or from your CI if configured).
+2) Double‑click to install. The installer creates Start Menu entries:
+   - Almuslim — runs the app
+   - Almuslim (Setup City) — opens the city selector once and saves your config
+3) After install, press the Windows key and type “Almuslim”.
+
+Option B — Build and run from source:
+
+1) Prereqs: CMake 3.16+, and one of: Visual Studio (MSVC), LLVM/Clang + Ninja, or MinGW‑w64 (g++ + mingw32‑make).
+2) From the repo root in PowerShell:
+   - cd Terminal/Windows
+   - ./build.ps1 -Release
+   - .\run.cmd  --setup
+
+The .\run.cmd script finds and runs the built al-muslim.exe without needing PowerShell.
 
 
-## Controls and usage
+## Quick start (macOS / Linux)
 
-- Start: `al-muslim`
-- Keyboard shortcuts:
-  - q: Quit
-  - r: Refresh
-  - c: Open config
-  - n: Show next 7 days
-  - h: Help overlay
+1) Prereqs: CMake 3.16+, Clang/GCC.
+2) From the repo root:
+   - macOS: cd Terminal/MacOS && chmod +x build.sh run.sh && ./build.sh && ./run.sh --setup
+   - Linux: cd Terminal/Linux && chmod +x build.sh run.sh && ./build.sh && ./run.sh --setup
 
-Note: Keybindings can vary depending on the final TUI design; see in‑app Help (h) for the authoritative list.
+
+## Usage
+
+- First run: al-muslim --setup to select your city and save config.
+- Normal run: al-muslim
+- Output shows today’s times and the next‑prayer countdown.
+
+Config file location:
+- Windows: %USERPROFILE%\.al-muslim\config.toml
+- macOS/Linux: ~/.al-muslim/config.toml
+
+Environment override:
+- ALMUSLIM_CONFIG — set a custom config file path.
 
 
 ## Configuration
 
-Default config path:
+You can copy the sample config and edit it:
 
-- Linux/macOS: `~/.al-muslim/config.toml`
-- Windows: `%USERPROFILE%\.al-muslim\config.toml`
+PowerShell (from repo root):
+- Copy-Item -Path .\config.sample.toml -Destination "$HOME/.al-muslim/config.toml" -Force
 
-You can copy and edit the sample to get started:
-
-```powershell
-# From repo root
-Copy-Item -Path .\config.sample.toml -Destination "$HOME/.al-muslim/config.toml" -Force
-```
-
-Abridged example (see `config.sample.toml` for all options):
+Example (abridged):
 
 ```toml
 [location]
 city = "Riyadh"
 latitude = 24.7136
 longitude = 46.6753
-timezone = "Asia/Riyadh"  # Optional; app can infer from system
+# Timezone: prefer numeric offsets for the C++ CLI, e.g. "+03:00".
+# Some IANA names like "Asia/Riyadh" are recognized; otherwise the app uses your system timezone.
+timezone = "+03:00"
 
 [calculation]
-method = "umm_al_qura"    # mwl|isna|umm_al_qura|egypt|karachi|makkah|tehran|kuwait|qatar|singapore|turkey|france|russia|gulf|diyanet
-madhab = "shafi"          # shafi|hanafi
-high_latitude_rule = "middle_of_the_night"  # middle_of_the_night|seventh_of_the_night|twilight_angle
+method = "umm_al_qura"       # mwl|isna|umm_al_qura|egypt|karachi|makkah|tehran
+madhab = "shafi"             # shafi|hanafi
+high_latitude_rule = "middle_of_the_night"   # middle_of_the_night|seventh_of_the_night|twilight_angle
 
 [ui]
-language = "en"           # en|ar (more may be added)
-24h = true                 # use 24-hour clock
-colors = "auto"            # auto|light|dark
-
-[updates]
-auto_check = true          # non-blocking, silent if offline
-channel = "stable"         # stable|beta
+24h = true
+language = "en"
 ```
 
-Environment variables
-
-- `ALMUSLIM_CONFIG`: Override the config file path.
-- `TZ`: Some shells honor TZ; otherwise set `timezone` in config.
+Keys are read as flat key=value pairs, so section headers [location], [calculation] are optional for the CLI.
 
 
-## Calculation methods and rules
+## Calculation details
 
-- Methods: MWL, ISNA, Umm al‑Qura, Makkah, Egypt, Karachi, Tehran, Kuwait, Qatar, Singapore, Turkey (Diyanet), France, Russia, Gulf, etc.
-- Madhab: Shafi or Hanafi (affects Asr).
-- High‑latitude rules: angle‑based or night‑fraction (e.g., middle of the night) to handle regions with short nights.
-
-This app is designed to interoperate with common Python prayer time libraries. Under the hood you can expect:
-
-- Astral for sunrise/sunset and solar calculations.
-- HijriDate (Umm al‑Qura) for Hijri calendar.
-- Textual + Rich for the TUI.
+- Solar base: NOAA equation of time and declination; sunrise/sunset at −0.833° (refraction + solar radius).
+- Fajr/Isha: angle‑based by method presets; Umm al‑Qura uses a fixed Isha offset of 90 minutes after Maghrib.
+- Asr: Shafi (factor 1) or Hanafi (factor 2).
+- High‑latitude: night‑fraction (middle or seventh) or basic twilight‑angle rule fallback.
+- Timezone: numeric offsets like +03:00 are fully supported; a few common IANA names are mapped; otherwise system timezone is used.
 
 
-## Offline behavior
+## Windows installer (Inno Setup)
 
-- Once installed, the app computes times locally using your config and system clock.
-- Network access is only used for an optional update check (if enabled) or for any user‑requested geocoding features (if implemented). The app runs fine without internet.
+- Script: Terminal/Windows/installer.iss
+- Packager: Terminal/Windows/make_installer.ps1
+- The installer bundles al-muslim.exe and the data directory (cities.csv). It creates Start Menu shortcuts (normal and “Setup City”).
 
-
-## Developer setup
-
-> These are suggested steps for contributors; they may be adapted once the codebase is fully wired.
-
-Prereqs:
-
-- Python 3.10+
-- Git
-
-Create a virtual environment and install dev dependencies:
-
-```bash
-python -m venv .venv
-# PowerShell
-. .venv/Scripts/Activate.ps1
-# bash/zsh
-source .venv/bin/activate
-
-pip install -U pip wheel
-# Core runtime
-pip install textual rich astral hijri-date pytz
-# CLI helpers (if used)
-pip install typer[all] click
-# Packaging
-pip install pyinstaller
-# Lint/format (optional)
-pip install ruff black
-```
-
-Project layout (relevant to Terminal app):
-
-```
-Terminal/
-  Windows/
-  MacOS/
-  Linux/
-# …other app shells under App/
-```
-
-Running from source (example):
-
-```bash
-python -m al_muslim
-# or
-python Terminal/main.py  # if entry point is a script
-```
-
-Note: The exact module/entry point names depend on how the code is structured; check the `Terminal/` folder.
+CI: .github/workflows/release-windows-installer.yml builds the Release binary with Visual Studio and then compiles the installer. It triggers on tags starting with v (e.g., v0.1.0) or manual dispatch.
 
 
-## Building binaries with PyInstaller
+## Build from source (details)
 
-Create single‑file executables:
+Windows (PowerShell):
+- cd Terminal/Windows
+- ./build.ps1 -Release
+- .\run.cmd  [--setup]
 
-```bash
-# Windows
-pyinstaller -F -n al-muslim --console Terminal/main.py
+macOS:
+- cd Terminal/MacOS && chmod +x build.sh run.sh && ./build.sh
+- ./run.sh [--setup]
 
-# macOS (universal binaries require additional flags and a universal Python)
-pyinstaller -F -n Al-Muslim --windowed Terminal/main.py
+Linux:
+- cd Terminal/Linux && chmod +x build.sh run.sh && ./build.sh
+- ./run.sh [--setup]
 
-# Linux
-pyinstaller -F -n al-muslim Terminal/main.py
-```
-
-Tips:
-
-- Add a spec file (`al-muslim.spec`) for shared assets, icons, and data files.
-- For Textual apps, ensure the terminal is attached (`--console`) unless you build a GUI wrapper.
-- Sign and notarize macOS builds if you distribute widely.
+Binaries are placed under Terminal/cpp/build (and possibly build/Release when using Visual Studio). Data is copied next to the executable for runtime access.
 
 
 ## Troubleshooting
 
-- Timezone looks wrong: Set `timezone` explicitly in config, or check your OS time settings.
-- Wrong location: Provide `latitude`/`longitude` and `city` in config. If auto‑location is added later, ensure permissions.
-- High latitude (extreme north/south): Try another `high_latitude_rule`.
-- Fonts/boxes look broken: Switch your terminal to a font that supports box‑drawing and Arabic; try light/dark mode.
-- Windows colors: Use Windows Terminal or PowerShell 7+ for best ANSI support.
-
-
-## Roadmap
-
-- Location auto‑detection (with offline cache).
-- Localization (Arabic UI and more languages).
-- Export next‑7‑days/CSV.
-- Notifications before prayer time.
-- Minimal web API bridge.
+- Build configure fails on Windows:
+  - Ensure one toolchain is installed: Visual Studio (C++ Desktop), LLVM + Ninja, or MinGW‑w64 (g++, mingw32‑make).
+  - Delete Terminal/cpp/build* and re‑run Terminal/Windows/build.ps1.
+- Inno Setup not found: install from https://jrsoftware.org/isdl.php and make sure ISCC.exe is on PATH, or let CI build it.
+- Timezone looks off: set timezone to a numeric offset like "+03:00" in config, or ensure system timezone matches your city.
+- High latitudes: try high_latitude_rule = "seventh_of_the_night" or "twilight_angle".
 
 
 ## Contributing
 
-Issues and PRs are welcome. Please:
-
-- Keep features focused and small.
-- Add tests for new logic where feasible.
-- Update documentation for user‑visible changes.
+Small, focused PRs are welcome. Please include a brief description and update docs if behavior changes.
 
 
 ## License
 
-Choose and add a license (e.g., MIT/Apache‑2.0). Include `LICENSE` in the repository root.
+MIT — see LICENSE.
 
-
-## Credits
-
-- Textual and Rich for TUI/formatting
-- Astral for solar events
-- HijriDate (Umm al‑Qura)
-- PyInstaller for packaging
-
-Links:
-
-- Textual docs: https://textual.textualize.io/
-- Rich docs: https://rich.readthedocs.io/
-- Astral: https://astral.readthedocs.io/
-- HijriDate: https://pypi.org/project/hijri-date/
-- PyInstaller: https://www.pyinstaller.org/
-
-
-## C++ native build (fast CLI)
-
-This repo also includes a portable C++ CLI implementation (work‑in‑progress) that starts instantly and can be extended with native libraries. It uses CMake and requires a C++17 compiler.
-
-Prereqs:
-
-- CMake 3.16+
-- Ninja (recommended) or your default generator
-- A C++17 compiler (MSVC, Clang, or GCC)
-
-Build and run:
-
-Windows (PowerShell):
-
-```powershell
-# From repo root
-Set-Location "Terminal/Windows"
-./build.ps1 -Release
-# Run
-& ../cpp/build/al-muslim.exe
-```
-
-macOS:
-
-```bash
-cd Terminal/MacOS
-chmod +x build.sh
-./build.sh
-# Run
-../cpp/build/al-muslim
-```
-
-Linux:
-
-```bash
-cd Terminal/Linux
-chmod +x build.sh
-./build.sh
-# Run
-../cpp/build/al-muslim
-```
-
-Notes:
-
-- Config path resolution mirrors the Python version: `~/.al-muslim/config.toml` on all OSes (Windows uses `%USERPROFILE%\\.al-muslim\\config.toml`). You can override via `ALMUSLIM_CONFIG`.
-- The current C++ app prints placeholders for prayer times; integrate a prayer time library (e.g., Adhan algorithms) and a Hijri date library for full parity.
-- For a rich TUI in C++, consider FTXUI. For TOML parsing, consider `toml++`.
