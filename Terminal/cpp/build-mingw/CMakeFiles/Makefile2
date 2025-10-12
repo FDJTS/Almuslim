@@ -84,12 +84,12 @@ clean: CMakeFiles/al-muslim.dir/clean
 CMakeFiles/al-muslim.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\al-muslim.dir\build.make CMakeFiles/al-muslim.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\al-muslim.dir\build.make CMakeFiles/al-muslim.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="E:\Zyad\Scripts\Ma shitty projects\Almuslim\Terminal\cpp\build-mingw\CMakeFiles" --progress-num=1,2,3,4 "Built target al-muslim"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="E:\Zyad\Scripts\Ma shitty projects\Almuslim\Terminal\cpp\build-mingw\CMakeFiles" --progress-num=1,2,3,4,5 "Built target al-muslim"
 .PHONY : CMakeFiles/al-muslim.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/al-muslim.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "E:\Zyad\Scripts\Ma shitty projects\Almuslim\Terminal\cpp\build-mingw\CMakeFiles" 4
+	$(CMAKE_COMMAND) -E cmake_progress_start "E:\Zyad\Scripts\Ma shitty projects\Almuslim\Terminal\cpp\build-mingw\CMakeFiles" 5
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/al-muslim.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start "E:\Zyad\Scripts\Ma shitty projects\Almuslim\Terminal\cpp\build-mingw\CMakeFiles" 0
 .PHONY : CMakeFiles/al-muslim.dir/rule
@@ -101,7 +101,7 @@ al-muslim: CMakeFiles/al-muslim.dir/rule
 # codegen rule for target.
 CMakeFiles/al-muslim.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\al-muslim.dir\build.make CMakeFiles/al-muslim.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="E:\Zyad\Scripts\Ma shitty projects\Almuslim\Terminal\cpp\build-mingw\CMakeFiles" --progress-num=1,2,3,4 "Finished codegen for target al-muslim"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir="E:\Zyad\Scripts\Ma shitty projects\Almuslim\Terminal\cpp\build-mingw\CMakeFiles" --progress-num=1,2,3,4,5 "Finished codegen for target al-muslim"
 .PHONY : CMakeFiles/al-muslim.dir/codegen
 
 # clean rule for target.

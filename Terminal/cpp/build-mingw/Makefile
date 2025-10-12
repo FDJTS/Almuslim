@@ -173,6 +173,30 @@ al-muslim/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\al-muslim.dir\build.make CMakeFiles/al-muslim.dir/build
 .PHONY : al-muslim/fast
 
+src/hijri.obj: src/hijri.cpp.obj
+.PHONY : src/hijri.obj
+
+# target to build an object file
+src/hijri.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\al-muslim.dir\build.make CMakeFiles/al-muslim.dir/src/hijri.cpp.obj
+.PHONY : src/hijri.cpp.obj
+
+src/hijri.i: src/hijri.cpp.i
+.PHONY : src/hijri.i
+
+# target to preprocess a source file
+src/hijri.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\al-muslim.dir\build.make CMakeFiles/al-muslim.dir/src/hijri.cpp.i
+.PHONY : src/hijri.cpp.i
+
+src/hijri.s: src/hijri.cpp.s
+.PHONY : src/hijri.s
+
+# target to generate assembly for a file
+src/hijri.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\al-muslim.dir\build.make CMakeFiles/al-muslim.dir/src/hijri.cpp.s
+.PHONY : src/hijri.cpp.s
+
 src/main.obj: src/main.cpp.obj
 .PHONY : src/main.obj
 
@@ -258,6 +282,9 @@ help:
 	@echo ... list_install_components
 	@echo ... rebuild_cache
 	@echo ... al-muslim
+	@echo ... src/hijri.obj
+	@echo ... src/hijri.i
+	@echo ... src/hijri.s
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s

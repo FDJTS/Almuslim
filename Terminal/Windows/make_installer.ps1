@@ -45,6 +45,12 @@ if (Test-Path (Join-Path $buildAbs "data")) {
   Copy-Item (Join-Path $buildAbs "data") (Join-Path $stage "data") -Recurse -Force
 }
 
+# Copy app icon (.ico) so shortcuts can use it
+$icoSource = Join-Path $scriptRoot "..\..\App\Assets\logo\al-muslim.ico"
+if (Test-Path $icoSource) {
+  Copy-Item $icoSource (Join-Path $stage "al-muslim.ico") -Force
+}
+
 # Compile installer
 Push-Location $scriptRoot
 try {

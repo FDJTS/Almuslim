@@ -16,6 +16,7 @@
 
 #include "platform.hpp"
 #include "ui.hpp"
+#include "hijri.hpp"
 
 #if defined(_WIN32)
 #include <windows.h>
@@ -84,6 +85,72 @@ static std::string now_local_iso() {
     oss << std::put_time(&tm, "%Y-%m-%d %H:%M:%S");
     return oss.str();
 }
+
+// Very simple Hijri approximation (Umm al-Qura-like) for display only.
+// For production-grade accuracy, replace with a true Umm al-Qura table-based conversion.
+static std::string approx_hijri_date(const std::tm &lt){
+    // Algorithm: Kuwaiti algorithm-style rough approximation
+    int y = lt.tm_year + 1900;
+    int m = lt.tm_mon + 1;
+    int d = lt.tm_mday;
+    // Julian Day Number (approx Gregorian to JDN)
+    int a = (14 - m)/12;
+    int y2 = y + 4800 - a;
+    int m2 = m + 12*a - 3;
+    long jdn = d + (153*m2 + 2)/5 + 365L*y2 + y2/4 - y2/100 + y2/400 - 32045;
+    // Islamic date calculation (Tabular, 30-year cycle)
+    long l = jdn - 1948439; // days since 1 Muharram 1 AH (approx)
+    long hcycles = l / 10631; // 30-year cycles
+    l %= 10631;
+    long ycycle = (l - 0.1335) / 354.36667; // close fit
+    if (ycycle < 0) ycycle = 0;
+    long hy = 1 + (long)ycycle + 30*hcycles;
+    long doy = l - (long)(std::floor((ycycle)*354.36667 + 0.5));
+    if (doy < 0) doy = 0;
+    // Months: alternates 30/29 roughly; 12 months per year
+    int hm = 1; int hd = (int)doy + 1; // start counting day 1
+    static const int ml[12] = {30,29,30,29,30,29,30,29,30,29,30,29};
+    for (int i=0;i<12;i++){
+        if (hd > ml[i]){ hd -= ml[i]; hm++; }
+        else break;
+    }
+    const char* mnames[12] = {"Muharram","Safar","Rabi' I","Rabi' II","Jumada I","Jumada II","Rajab","Sha'ban","Ramadan","Shawwal","Dhul-Qa'dah","Dhul-Hijjah"};
+    hm = std::min(std::max(hm,1),12);
+    char buf[128];
+    std::snprintf(buf, sizeof(buf), "%d %s %ld AH", hd, mnames[hm-1], hy);
+    return std::string(buf);
+}
+
+// Add or subtract whole days from a time_t, returning local tm
+static std::tm add_days_local(std::tm base, int days){
+    base.tm_isdst = -1; // let mktime decide
+    time_t t = mktime(&base);
+    if (t == (time_t)-1) {
+        std::tm zero{}; return zero;
+    }
+    t += static_cast<time_t>(days) * 24 * 3600;
+    std::tm out{};
+#if defined(_WIN32)
+    localtime_s(&out, &t);
+#else
+    localtime_r(&t, &out);
+#endif
+    return out;
+}
+
+// Simple theming: none|light|dark|auto (auto=use dark)
+struct Theme { bool color = true; bool dark = true; };
+static Theme resolve_theme(const std::string &colors){
+    std::string c = colors; std::string x; x.resize(c.size());
+    std::transform(c.begin(), c.end(), x.begin(), [](unsigned char ch){ return (char)std::tolower(ch); });
+    if (x == "none" || x == "off") return Theme{false, true};
+    if (x == "light") return Theme{true, false};
+    if (x == "dark") return Theme{true, true};
+    // auto default to dark
+    return Theme{true, true};
+}
+static std::string cstr(const Theme &t, const char* code){ return t.color ? std::string(code) : std::string(""); }
+static std::string creset(const Theme &t){ return t.color ? std::string("\x1b[0m") : std::string(""); }
 
 // Math helpers
 static inline double deg2rad(double d){ return d * M_PI / 180.0; }
@@ -288,6 +355,15 @@ static void write_or_update_config(const fs::path& p, const std::unordered_map<s
 
 int main(int argc, char** argv) {
     try {
+        bool askEveryLaunch = false;
+        bool showWeek = false;
+        std::optional<std::string> weekCsvPath;
+        for (int i=1;i<argc;i++){
+            std::string a = argv[i];
+            if (a == "--ask") askEveryLaunch = true;
+            if (a == "--week") showWeek = true;
+            if (a == "--week-csv" && i+1 < argc) { weekCsvPath = std::string(argv[++i]); }
+        }
         // Resolve config path
         fs::path config = platform::resolve_config_path();
         std::unordered_map<std::string, std::string> cfg;
@@ -304,7 +380,8 @@ int main(int argc, char** argv) {
                 std::cout << "No cities database found at " << (dataDir/"cities.csv").string() << "\n";
                 return 1;
             }
-            auto chosen = select_city_interactive(cities);
+            // Free-text input for more professional UX
+            auto chosen = prompt_city_free_text(cities);
             if (!chosen){ std::cout << "Setup cancelled.\n"; return 0; }
             const City &c = *chosen;
             std::unordered_map<std::string,std::string> updates;
@@ -323,7 +400,22 @@ int main(int argc, char** argv) {
             cfg = read_simple_kv(config);
         }
 
-        std::cout << "Al-Muslim (C++)\n";
+        // Resolve theme and language from config early (fallbacks below)
+        auto get_raw = [&](const std::string &k)->std::string{
+            auto it = cfg.find(k); return it==cfg.end()?std::string():it->second;
+        };
+        std::string lang = get_raw("language"); if (lang.empty()) lang = "en";
+        std::string colors = get_raw("colors"); if (colors.empty()) colors = "auto";
+        Theme theme = resolve_theme(colors);
+
+        // Professional header with ASCII rendition of the logo
+        std::cout << cstr(theme, "\x1b[32m"); // green
+        std::cout << "   ○○○○○   ○○○○   ○○○○○    Almuslim\n";
+        std::cout << "  ○      ○   ○   ○      ○   Fast Terminal Prayer Times\n";
+        std::cout << "  ○   ◐   ○   ○   ○   ★  ○   (C++)\n";
+        std::cout << "  ○      ○   ○   ○      ○\n";
+        std::cout << "   ○○○○○     ○     ○○○○○\n";
+        std::cout << creset(theme);
         std::cout << "Date/Time (local): " << now_local_iso() << "\n";
         if (!config.empty()) {
             std::cout << "Config: " << config.string() << (fs::exists(config)?" (found)":" (missing)") << "\n";
@@ -342,12 +434,44 @@ int main(int argc, char** argv) {
         std::string madhab = get("madhab", "shafi");
     std::string hlr = get("high_latitude_rule", "middle_of_the_night");
     std::string tzS = get("timezone", "");
-        bool use24h = true; { auto v = get("24h","true"); std::string s=v; std::transform(s.begin(),s.end(),s.begin(),::tolower); use24h = (s=="true"||s=="1"||s=="yes"); }
+    bool use24h = true; { auto v = get("24h","true"); std::string s=v; std::transform(s.begin(),s.end(),s.begin(),::tolower); use24h = (s=="true"||s=="1"||s=="yes"); }
+    // ask_on_start in config (optional)
+    { auto v = get("ask_on_start","false"); std::string s=v; std::transform(s.begin(),s.end(),s.begin(),::tolower); if (s=="true"||s=="1"||s=="yes") askEveryLaunch = true; }
 
-        std::cout << "City: " << city << "\n";
-        std::cout << "Latitude: " << (latS.empty()?"(unset)":latS) << ", Longitude: " << (lonS.empty()?"(unset)":lonS) << "\n";
-        std::cout << "Method: " << method << ", Madhab: " << madhab << "\n";
-        std::cout << "High-latitude: " << hlr << "\n";
+        // Ask for city each launch if requested or if not set
+        if (askEveryLaunch || city == "(unset)" || latS.empty() || lonS.empty()){
+            fs::path exeDir = fs::path(argv[0]).parent_path();
+            fs::path dataDir = exeDir / "data";
+            auto cities = load_cities(dataDir);
+            if (!cities.empty()){
+                auto chosen = prompt_city_free_text(cities);
+                if (chosen){
+                    const City &c = *chosen;
+                    city = c.name + ", " + c.country;
+                    latS = std::to_string(c.lat);
+                    lonS = std::to_string(c.lon);
+                    tzS = c.tz;
+                    // persist
+                    std::unordered_map<std::string,std::string> updates;
+                    auto q = [](const std::string &s){ return '"' + s + '"'; };
+                    updates["city"] = q(city);
+                    updates["latitude"] = latS;
+                    updates["longitude"] = lonS;
+                    updates["timezone"] = q(tzS);
+                    write_or_update_config(config, updates);
+                }
+            }
+        }
+
+    // Labels (English/Arabic)
+    bool ar = false; { std::string L=lang; std::transform(L.begin(),L.end(),L.begin(),::tolower); ar = (L=="ar"||L=="arabic"); }
+    auto Lbl = [&](const char* en, const char* arLabel){ return ar ? std::string(arLabel) : std::string(en); };
+
+    std::cout << Lbl("City", "المدينة") << ": " << city << "\n";
+    std::cout << Lbl("Latitude", "خط العرض") << ": " << (latS.empty()?"(unset)":latS) << ", "
+          << Lbl("Longitude", "خط الطول") << ": " << (lonS.empty()?"(unset)":lonS) << "\n";
+    std::cout << Lbl("Method", "الطريقة") << ": " << method << ", " << Lbl("Madhab", "المذهب") << ": " << madhab << "\n";
+    std::cout << Lbl("High-latitude", "خطوط العرض العليا") << ": " << hlr << "\n";
 
         double latitude=0.0, longitude=0.0;
         if (!latS.empty()) latitude = std::stod(latS);
@@ -389,17 +513,43 @@ int main(int argc, char** argv) {
         }
         PrayerTimes pt = *ptOpt;
 
+        // Hijri date: prefer precise table if available
+        fs::path exeDir = fs::path(argv[0]).parent_path();
+        fs::path dataDir = exeDir / "data";
+    static bool hjLoaded = hijri::load_umm_al_qura(dataDir);
+        std::string hijriStr;
+        if (hjLoaded){
+            auto hd = hijri::hijri_for_date(lt);
+            if (hd){
+                bool ar = false; { std::string L=lang; std::transform(L.begin(),L.end(),L.begin(),::tolower); ar = (L=="ar"||L=="arabic"); }
+                const char* mname = ar ? hijri::month_name_ar(hd->month) : hijri::month_name_en(hd->month);
+                char buf[128]; std::snprintf(buf, sizeof(buf), "%d %s %d AH", hd->day, mname, hd->year);
+                hijriStr = buf;
+            }
+        }
+        if (hijriStr.empty()){
+            hijriStr = approx_hijri_date(lt);
+        }
+    std::cout << "\n" << cstr(theme, "\x1b[36m") << hijriStr << creset(theme) << "\n";
+
     std::cout << "\n==============================\n";
     std::cout << " City     : " << city << "\n";
     std::cout << " Method   : " << method << " (" << madhab << ")" << "\n";
     std::cout << "------------------------------\n";
-    std::cout << " Fajr     : " << fmt_time(pt.fajr, use24h) << "\n";
-    std::cout << " Sunrise  : " << fmt_time(pt.sunrise, use24h) << "\n";
-    std::cout << " Dhuhr    : " << fmt_time(pt.dhuhr, use24h) << "\n";
-    std::cout << " Asr      : " << fmt_time(pt.asr, use24h) << "\n";
-    std::cout << " Maghrib  : " << fmt_time(pt.maghrib, use24h) << "\n";
-    std::cout << " Isha     : " << fmt_time(pt.isha, use24h) << "\n";
+    std::cout << " " << Lbl("Fajr","الفجر") << "     : " << fmt_time(pt.fajr, use24h) << "\n";
+    std::cout << " " << Lbl("Sunrise","الشروق") << "  : " << fmt_time(pt.sunrise, use24h) << "\n";
+    std::cout << " " << Lbl("Dhuhr","الظهر") << "    : " << fmt_time(pt.dhuhr, use24h) << "\n";
+    std::cout << " " << Lbl("Asr","العصر") << "      : " << fmt_time(pt.asr, use24h) << "\n";
+    std::cout << " " << Lbl("Maghrib","المغرب") << "  : " << fmt_time(pt.maghrib, use24h) << "\n";
+    std::cout << " " << Lbl("Isha","العشاء") << "     : " << fmt_time(pt.isha, use24h) << "\n";
     std::cout << "==============================\n";
+
+        // Extra: Day length info
+        double dayLenH = pt.maghrib - pt.sunrise; if (dayLenH < 0) dayLenH += 24.0;
+        int dlh = (int)std::floor(dayLenH + 1e-9);
+        int dlm = (int)std::floor((dayLenH - dlh)*60.0 + 0.5); if (dlm==60){dlh+=1;dlm=0;}
+        char dBuf[32]; std::snprintf(dBuf, sizeof(dBuf), "%02d:%02d", std::max(0,dlh), std::max(0,dlm));
+    std::cout << Lbl("Day length","طول النهار") << ": " << dBuf << "\n";
 
         // Next prayer countdown
         double nowH = hours_since_midnight_local();
@@ -415,8 +565,41 @@ int main(int argc, char** argv) {
         int m = static_cast<int>(std::floor((nextInH - h)*60.0 + 0.5));
         if (m==60){ h+=1; m=0; }
         char buf[32]; std::snprintf(buf, sizeof(buf), "%02d:%02d", std::max(0,h), std::max(0,m));
-    std::cout << "\nNext (" << nextName << ") in: " << buf << "\n";
-    std::cout << "Tip: run with --setup to pick your city interactively.\n";
+    std::cout << "\n" << Lbl("Next","التالي") << " (" << nextName << ") " << Lbl("in","بعد") << ": " << buf << "\n";
+    std::cout << Lbl("Tip","معلومة") << ": " << Lbl("run with --setup for first-time setup, or --ask to choose a city on each launch.",
+                                 "استخدم --setup للإعداد لأول مرة، أو --ask لاختيار المدينة عند كل تشغيل.") << "\n";
+
+        // Weekly schedule
+        if (showWeek || weekCsvPath.has_value()) {
+            std::cout << "\n" << Lbl("Next 7 days","السبعة أيام القادمة") << ":\n";
+            std::cout << "---------------------------------------------\n";
+            std::ofstream csv;
+            if (weekCsvPath){ csv.open(*weekCsvPath, std::ios::out | std::ios::trunc); if (csv) csv << "date,fajr,sunrise,dhuhr,asr,maghrib,isha\n"; }
+            for (int i=0;i<7;i++){
+                std::tm dt = add_days_local(lt, i);
+                auto pt2 = compute_prayer_times(dt, latitude, longitude, method, madhab, hlr, tzOverride);
+                if (!pt2) continue;
+                char dstr[32]; std::snprintf(dstr, sizeof(dstr), "%04d-%02d-%02d", dt.tm_year+1900, dt.tm_mon+1, dt.tm_mday);
+                std::cout << dstr << " | "
+                          << Lbl("Fajr","فجر") << ": " << fmt_time(pt2->fajr, use24h) << ", "
+                          << Lbl("Dhuhr","ظهر") << ": " << fmt_time(pt2->dhuhr, use24h) << ", "
+                          << Lbl("Asr","عصر") << ": " << fmt_time(pt2->asr, use24h) << ", "
+                          << Lbl("Maghrib","مغرب") << ": " << fmt_time(pt2->maghrib, use24h) << ", "
+                          << Lbl("Isha","عشاء") << ": " << fmt_time(pt2->isha, use24h)
+                          << "\n";
+                if (csv){
+                    csv << dstr << ","
+                        << fmt_time(pt2->fajr, true) << ","
+                        << fmt_time(pt2->sunrise, true) << ","
+                        << fmt_time(pt2->dhuhr, true) << ","
+                        << fmt_time(pt2->asr, true) << ","
+                        << fmt_time(pt2->maghrib, true) << ","
+                        << fmt_time(pt2->isha, true) << "\n";
+                }
+            }
+            std::cout << "---------------------------------------------\n";
+            if (csv){ std::cout << Lbl("CSV written to","تم حفظ CSV في") << ": " << *weekCsvPath << "\n"; }
+        }
 
     // Normal exit
 #if defined(_WIN32)

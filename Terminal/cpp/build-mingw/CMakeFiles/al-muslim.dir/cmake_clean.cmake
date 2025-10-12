@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/al-muslim.dir/src/hijri.cpp.obj"
+  "CMakeFiles/al-muslim.dir/src/hijri.cpp.obj.d"
   "CMakeFiles/al-muslim.dir/src/main.cpp.obj"
   "CMakeFiles/al-muslim.dir/src/main.cpp.obj.d"
   "CMakeFiles/al-muslim.dir/src/platform.cpp.obj"

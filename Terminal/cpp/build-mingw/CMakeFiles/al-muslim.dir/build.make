@@ -75,49 +75,64 @@ CMakeFiles/al-muslim.dir/src/main.cpp.obj: CMakeFiles/al-muslim.dir/flags.make
 CMakeFiles/al-muslim.dir/src/main.cpp.obj: E:/Zyad/Scripts/Ma\ shitty\ projects/Almuslim/Terminal/cpp/src/main.cpp
 CMakeFiles/al-muslim.dir/src/main.cpp.obj: CMakeFiles/al-muslim.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="E:\Zyad\Scripts\Ma shitty projects\Almuslim\Terminal\cpp\build-mingw\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/al-muslim.dir/src/main.cpp.obj"
-	C:\msys64\mingw64\bin\x86_64-w64-mingw32-g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/al-muslim.dir/src/main.cpp.obj -MF CMakeFiles\al-muslim.dir\src\main.cpp.obj.d -o CMakeFiles\al-muslim.dir\src\main.cpp.obj -c "E:\Zyad\Scripts\Ma shitty projects\Almuslim\Terminal\cpp\src\main.cpp"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/al-muslim.dir/src/main.cpp.obj -MF CMakeFiles\al-muslim.dir\src\main.cpp.obj.d -o CMakeFiles\al-muslim.dir\src\main.cpp.obj -c "E:\Zyad\Scripts\Ma shitty projects\Almuslim\Terminal\cpp\src\main.cpp"
 
 CMakeFiles/al-muslim.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/al-muslim.dir/src/main.cpp.i"
-	C:\msys64\mingw64\bin\x86_64-w64-mingw32-g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "E:\Zyad\Scripts\Ma shitty projects\Almuslim\Terminal\cpp\src\main.cpp" > CMakeFiles\al-muslim.dir\src\main.cpp.i
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "E:\Zyad\Scripts\Ma shitty projects\Almuslim\Terminal\cpp\src\main.cpp" > CMakeFiles\al-muslim.dir\src\main.cpp.i
 
 CMakeFiles/al-muslim.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/al-muslim.dir/src/main.cpp.s"
-	C:\msys64\mingw64\bin\x86_64-w64-mingw32-g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "E:\Zyad\Scripts\Ma shitty projects\Almuslim\Terminal\cpp\src\main.cpp" -o CMakeFiles\al-muslim.dir\src\main.cpp.s
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "E:\Zyad\Scripts\Ma shitty projects\Almuslim\Terminal\cpp\src\main.cpp" -o CMakeFiles\al-muslim.dir\src\main.cpp.s
 
 CMakeFiles/al-muslim.dir/src/platform.cpp.obj: CMakeFiles/al-muslim.dir/flags.make
 CMakeFiles/al-muslim.dir/src/platform.cpp.obj: E:/Zyad/Scripts/Ma\ shitty\ projects/Almuslim/Terminal/cpp/src/platform.cpp
 CMakeFiles/al-muslim.dir/src/platform.cpp.obj: CMakeFiles/al-muslim.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="E:\Zyad\Scripts\Ma shitty projects\Almuslim\Terminal\cpp\build-mingw\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/al-muslim.dir/src/platform.cpp.obj"
-	C:\msys64\mingw64\bin\x86_64-w64-mingw32-g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/al-muslim.dir/src/platform.cpp.obj -MF CMakeFiles\al-muslim.dir\src\platform.cpp.obj.d -o CMakeFiles\al-muslim.dir\src\platform.cpp.obj -c "E:\Zyad\Scripts\Ma shitty projects\Almuslim\Terminal\cpp\src\platform.cpp"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/al-muslim.dir/src/platform.cpp.obj -MF CMakeFiles\al-muslim.dir\src\platform.cpp.obj.d -o CMakeFiles\al-muslim.dir\src\platform.cpp.obj -c "E:\Zyad\Scripts\Ma shitty projects\Almuslim\Terminal\cpp\src\platform.cpp"
 
 CMakeFiles/al-muslim.dir/src/platform.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/al-muslim.dir/src/platform.cpp.i"
-	C:\msys64\mingw64\bin\x86_64-w64-mingw32-g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "E:\Zyad\Scripts\Ma shitty projects\Almuslim\Terminal\cpp\src\platform.cpp" > CMakeFiles\al-muslim.dir\src\platform.cpp.i
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "E:\Zyad\Scripts\Ma shitty projects\Almuslim\Terminal\cpp\src\platform.cpp" > CMakeFiles\al-muslim.dir\src\platform.cpp.i
 
 CMakeFiles/al-muslim.dir/src/platform.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/al-muslim.dir/src/platform.cpp.s"
-	C:\msys64\mingw64\bin\x86_64-w64-mingw32-g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "E:\Zyad\Scripts\Ma shitty projects\Almuslim\Terminal\cpp\src\platform.cpp" -o CMakeFiles\al-muslim.dir\src\platform.cpp.s
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "E:\Zyad\Scripts\Ma shitty projects\Almuslim\Terminal\cpp\src\platform.cpp" -o CMakeFiles\al-muslim.dir\src\platform.cpp.s
 
 CMakeFiles/al-muslim.dir/src/ui.cpp.obj: CMakeFiles/al-muslim.dir/flags.make
 CMakeFiles/al-muslim.dir/src/ui.cpp.obj: E:/Zyad/Scripts/Ma\ shitty\ projects/Almuslim/Terminal/cpp/src/ui.cpp
 CMakeFiles/al-muslim.dir/src/ui.cpp.obj: CMakeFiles/al-muslim.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="E:\Zyad\Scripts\Ma shitty projects\Almuslim\Terminal\cpp\build-mingw\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/al-muslim.dir/src/ui.cpp.obj"
-	C:\msys64\mingw64\bin\x86_64-w64-mingw32-g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/al-muslim.dir/src/ui.cpp.obj -MF CMakeFiles\al-muslim.dir\src\ui.cpp.obj.d -o CMakeFiles\al-muslim.dir\src\ui.cpp.obj -c "E:\Zyad\Scripts\Ma shitty projects\Almuslim\Terminal\cpp\src\ui.cpp"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/al-muslim.dir/src/ui.cpp.obj -MF CMakeFiles\al-muslim.dir\src\ui.cpp.obj.d -o CMakeFiles\al-muslim.dir\src\ui.cpp.obj -c "E:\Zyad\Scripts\Ma shitty projects\Almuslim\Terminal\cpp\src\ui.cpp"
 
 CMakeFiles/al-muslim.dir/src/ui.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/al-muslim.dir/src/ui.cpp.i"
-	C:\msys64\mingw64\bin\x86_64-w64-mingw32-g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "E:\Zyad\Scripts\Ma shitty projects\Almuslim\Terminal\cpp\src\ui.cpp" > CMakeFiles\al-muslim.dir\src\ui.cpp.i
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "E:\Zyad\Scripts\Ma shitty projects\Almuslim\Terminal\cpp\src\ui.cpp" > CMakeFiles\al-muslim.dir\src\ui.cpp.i
 
 CMakeFiles/al-muslim.dir/src/ui.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/al-muslim.dir/src/ui.cpp.s"
-	C:\msys64\mingw64\bin\x86_64-w64-mingw32-g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "E:\Zyad\Scripts\Ma shitty projects\Almuslim\Terminal\cpp\src\ui.cpp" -o CMakeFiles\al-muslim.dir\src\ui.cpp.s
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "E:\Zyad\Scripts\Ma shitty projects\Almuslim\Terminal\cpp\src\ui.cpp" -o CMakeFiles\al-muslim.dir\src\ui.cpp.s
+
+CMakeFiles/al-muslim.dir/src/hijri.cpp.obj: CMakeFiles/al-muslim.dir/flags.make
+CMakeFiles/al-muslim.dir/src/hijri.cpp.obj: E:/Zyad/Scripts/Ma\ shitty\ projects/Almuslim/Terminal/cpp/src/hijri.cpp
+CMakeFiles/al-muslim.dir/src/hijri.cpp.obj: CMakeFiles/al-muslim.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="E:\Zyad\Scripts\Ma shitty projects\Almuslim\Terminal\cpp\build-mingw\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/al-muslim.dir/src/hijri.cpp.obj"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/al-muslim.dir/src/hijri.cpp.obj -MF CMakeFiles\al-muslim.dir\src\hijri.cpp.obj.d -o CMakeFiles\al-muslim.dir\src\hijri.cpp.obj -c "E:\Zyad\Scripts\Ma shitty projects\Almuslim\Terminal\cpp\src\hijri.cpp"
+
+CMakeFiles/al-muslim.dir/src/hijri.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/al-muslim.dir/src/hijri.cpp.i"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "E:\Zyad\Scripts\Ma shitty projects\Almuslim\Terminal\cpp\src\hijri.cpp" > CMakeFiles\al-muslim.dir\src\hijri.cpp.i
+
+CMakeFiles/al-muslim.dir/src/hijri.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/al-muslim.dir/src/hijri.cpp.s"
+	C:\msys64\mingw64\bin\c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "E:\Zyad\Scripts\Ma shitty projects\Almuslim\Terminal\cpp\src\hijri.cpp" -o CMakeFiles\al-muslim.dir\src\hijri.cpp.s
 
 # Object files for target al-muslim
 al__muslim_OBJECTS = \
 "CMakeFiles/al-muslim.dir/src/main.cpp.obj" \
 "CMakeFiles/al-muslim.dir/src/platform.cpp.obj" \
-"CMakeFiles/al-muslim.dir/src/ui.cpp.obj"
+"CMakeFiles/al-muslim.dir/src/ui.cpp.obj" \
+"CMakeFiles/al-muslim.dir/src/hijri.cpp.obj"
 
 # External object files for target al-muslim
 al__muslim_EXTERNAL_OBJECTS =
@@ -125,11 +140,12 @@ al__muslim_EXTERNAL_OBJECTS =
 al-muslim.exe: CMakeFiles/al-muslim.dir/src/main.cpp.obj
 al-muslim.exe: CMakeFiles/al-muslim.dir/src/platform.cpp.obj
 al-muslim.exe: CMakeFiles/al-muslim.dir/src/ui.cpp.obj
+al-muslim.exe: CMakeFiles/al-muslim.dir/src/hijri.cpp.obj
 al-muslim.exe: CMakeFiles/al-muslim.dir/build.make
 al-muslim.exe: CMakeFiles/al-muslim.dir/linkLibs.rsp
 al-muslim.exe: CMakeFiles/al-muslim.dir/objects1.rsp
 al-muslim.exe: CMakeFiles/al-muslim.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="E:\Zyad\Scripts\Ma shitty projects\Almuslim\Terminal\cpp\build-mingw\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable al-muslim.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="E:\Zyad\Scripts\Ma shitty projects\Almuslim\Terminal\cpp\build-mingw\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable al-muslim.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\al-muslim.dir\link.txt --verbose=$(VERBOSE)
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold "Copying data directory to output"
 	"C:\Program Files\CMake\bin\cmake.exe" -E copy_directory "E:/Zyad/Scripts/Ma shitty projects/Almuslim/Terminal/cpp/data" "E:/Zyad/Scripts/Ma shitty projects/Almuslim/Terminal/cpp/build-mingw/data"

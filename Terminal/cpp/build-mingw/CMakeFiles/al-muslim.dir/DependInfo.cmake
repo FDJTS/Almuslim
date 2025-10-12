@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "E:/Zyad/Scripts/Ma shitty projects/Almuslim/Terminal/cpp/src/hijri.cpp" "CMakeFiles/al-muslim.dir/src/hijri.cpp.obj" "gcc" "CMakeFiles/al-muslim.dir/src/hijri.cpp.obj.d"
   "E:/Zyad/Scripts/Ma shitty projects/Almuslim/Terminal/cpp/src/main.cpp" "CMakeFiles/al-muslim.dir/src/main.cpp.obj" "gcc" "CMakeFiles/al-muslim.dir/src/main.cpp.obj.d"
   "E:/Zyad/Scripts/Ma shitty projects/Almuslim/Terminal/cpp/src/platform.cpp" "CMakeFiles/al-muslim.dir/src/platform.cpp.obj" "gcc" "CMakeFiles/al-muslim.dir/src/platform.cpp.obj.d"
   "E:/Zyad/Scripts/Ma shitty projects/Almuslim/Terminal/cpp/src/ui.cpp" "CMakeFiles/al-muslim.dir/src/ui.cpp.obj" "gcc" "CMakeFiles/al-muslim.dir/src/ui.cpp.obj.d"

@@ -24,6 +24,7 @@ Compression=lzma
 SolidCompression=yes
 PrivilegesRequired=lowest
 ArchitecturesInstallIn64BitMode=x64
+SetupIconFile=..\..\App\Assets\logo\al-muslim.ico
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -36,13 +37,15 @@ Name: "desktopicon"; Description: "Create a &desktop shortcut"; GroupDescription
 Source: "{#AppSource}\\al-muslim.exe"; DestDir: "{app}"; Flags: ignoreversion
 ; data directory (cities.csv)
 Source: "{#AppSource}\\data\\*"; DestDir: "{app}\\data"; Flags: ignoreversion recursesubdirs createallsubdirs
+; app icon for shortcuts
+Source: "{#AppSource}\\al-muslim.ico"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
 ; Start Menu
-Name: "{group}\\Almuslim"; Filename: "{app}\\al-muslim.exe"; WorkingDir: "{app}"
-Name: "{group}\\Almuslim (Setup City)"; Filename: "{app}\\al-muslim.exe"; Parameters: "--setup"; WorkingDir: "{app}"
+Name: "{group}\Almuslim"; Filename: "{app}\al-muslim.exe"; WorkingDir: "{app}"; IconFilename: "{app}\al-muslim.ico"
+Name: "{group}\Almuslim (Setup City)"; Filename: "{app}\al-muslim.exe"; Parameters: "--setup"; WorkingDir: "{app}"; IconFilename: "{app}\al-muslim.ico"
 ; Desktop (optional)
-Name: "{autodesktop}\\Almuslim"; Filename: "{app}\\al-muslim.exe"; Tasks: desktopicon; WorkingDir: "{app}"
+Name: "{autodesktop}\Almuslim"; Filename: "{app}\al-muslim.exe"; Tasks: desktopicon; WorkingDir: "{app}"; IconFilename: "{app}\al-muslim.ico"
 
 [Run]
 Filename: "{app}\\al-muslim.exe"; Description: "Run Almuslim now (setup city)"; Parameters: "--setup"; Flags: nowait postinstall skipifsilent

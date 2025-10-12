@@ -222,6 +222,7 @@ CMakeFiles/al-muslim.dir/src/main.cpp.obj: \
  C:/msys64/mingw64/include/c++/15.2.0/bits/hashtable_policy.h \
  E:\Zyad\Scripts\Ma\ shitty\ projects\Almuslim\Terminal\cpp\src\platform.hpp \
  E:\Zyad\Scripts\Ma\ shitty\ projects\Almuslim\Terminal\cpp\src\ui.hpp \
+ E:\Zyad\Scripts\Ma\ shitty\ projects\Almuslim\Terminal\cpp\src\hijri.hpp \
  C:/msys64/mingw64/include/windows.h \
  C:/msys64/mingw64/include/sdkddkver.h C:/msys64/mingw64/include/excpt.h \
  C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/stdarg.h \

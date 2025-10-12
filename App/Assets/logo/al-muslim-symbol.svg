@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#16a34a"/>
+      <stop offset="100%" stop-color="#065f46"/>
+    </linearGradient>
+    <!-- Crescent mask: white = visible, black = cutout -->
+    <mask id="crescent-mask">
+      <rect x="0" y="0" width="512" height="512" fill="black"/>
+      <!-- Large circle (visible) -->
+      <circle cx="256" cy="256" r="120" fill="white"/>
+      <!-- Offset circle (subtract) -->
+      <circle cx="300" cy="245" r="120" fill="black"/>
+    </mask>
+    <!-- Soft inner shadow for depth -->
+    <radialGradient id="innerShadow" cx="50%" cy="50%" r="50%">
+      <stop offset="70%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.12"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background circle (brand green) -->
+  <circle cx="256" cy="256" r="224" fill="url(#g)"/>
+  <!-- Subtle inner vignette -->
+  <circle cx="256" cy="256" r="224" fill="url(#innerShadow)"/>
+
+  <!-- Crescent (light) -->
+  <rect x="0" y="0" width="512" height="512" fill="#ffffff" opacity="0.95" mask="url(#crescent-mask)"/>
+
+  <!-- Star (five-point) -->
+  <!-- Positioned near the crescent opening -->
+  <g transform="translate(338,178) scale(1.0)">
+    <path d="M0,-22 L6.47,-7.0 L22,-7.0 L9.0,3.0 L13.5,18.5 L0,9.5 L-13.5,18.5 L-9.0,3.0 L-22,-7.0 L-6.47,-7.0 Z"
+          fill="#F7C948"/>
+  </g>
+
+  <!-- Optional outer ring for definition -->
+  <circle cx="256" cy="256" r="224" fill="none" stroke="#ffffff" stroke-opacity="0.15" stroke-width="6"/>
+</svg>

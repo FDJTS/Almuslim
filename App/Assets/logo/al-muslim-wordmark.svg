@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1024" height="256" viewBox="0 0 1024 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#16a34a"/>
+      <stop offset="100%" stop-color="#065f46"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Symbol on the left -->
+  <g transform="translate(32,28) scale(0.8)">
+    <defs>
+      <mask id="crescent-mask-wm">
+        <rect x="0" y="0" width="256" height="256" fill="black"/>
+        <circle cx="128" cy="128" r="60" fill="white"/>
+        <circle cx="150" cy="122" r="60" fill="black"/>
+      </mask>
+    </defs>
+    <circle cx="128" cy="128" r="112" fill="url(#g)"/>
+    <rect x="0" y="0" width="256" height="256" fill="#ffffff" opacity="0.95" mask="url(#crescent-mask-wm)"/>
+    <g transform="translate(180,78) scale(0.85)">
+      <path d="M0,-18 L5.2,-5.8 L18,-5.8 L7.4,2.4 L11,15.5 L0,8.1 L-11,15.5 L-7.4,2.4 L-18,-5.8 L-5.2,-5.8 Z"
+            fill="#F7C948"/>
+    </g>
+  </g>
+
+  <!-- Wordmark: Almuslim -->
+  <g transform="translate(240,60)">
+    <path d="M30 120 L50 60 L70 120 L62 120 L56 100 L44 100 L38 120 Z M46 92 L54 92 L50 80 Z" fill="#0f172a"/>
+    <rect x="88" y="78" width="12" height="42" rx="6" fill="#0f172a"/>
+    <path d="M124 120 L124 92 C124 82 132 76 142 76 C152 76 160 82 160 92 L160 120 L148 120 L148 94 C148 90 145 88 142 88 C139 88 136 90 136 94 L136 120 Z" fill="#0f172a"/>
+    <path d="M176 120 L176 78 L188 78 L188 120 Z" fill="#0f172a"/>
+    <path d="M212 120 L212 94 C212 84 220 76 232 76 C244 76 252 84 252 94 L252 120 L240 120 L240 96 C240 92 237 88 232 88 C227 88 224 92 224 96 L224 120 Z" fill="#0f172a"/>
+    <path d="M268 120 L268 90 C268 82 276 76 288 76 C300 76 308 82 308 90 C308 96 304 100 296 102 L286 105 C282 106 280 108 280 111 C280 114 283 116 288 116 C293 116 296 114 298 110 L308 112 C304 120 296 124 288 124 C276 124 268 118 268 110 C268 104 272 100 280 98 L290 95 C294 94 296 92 296 90 C296 87 293 86 288 86 C283 86 280 88 278 92 Z" fill="#0f172a"/>
+    <path d="M328 120 L328 92 C328 82 336 76 346 76 C356 76 364 82 364 92 L364 120 L352 120 L352 94 C352 90 349 88 346 88 C343 88 340 90 340 94 L340 120 Z" fill="#0f172a"/>
+    <path d="M380 120 L380 78 L392 78 L392 90 C396 82 404 76 416 76 L416 90 C406 90 396 96 396 110 L396 120 Z" fill="#0f172a"/>
+  </g>
+</svg>

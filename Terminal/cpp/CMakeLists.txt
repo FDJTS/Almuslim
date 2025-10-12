@@ -26,6 +26,7 @@ add_executable(al-muslim
   src/main.cpp
   src/platform.cpp
   src/ui.cpp
+  src/hijri.cpp
 )
 
 # Install rules

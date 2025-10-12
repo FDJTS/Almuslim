@@ -92,3 +92,45 @@ std::optional<City> select_city_interactive(const std::vector<City>& cities){
         }
     }
 }
+
+// Compute a simple score based on substring position and length similarity
+static int score_match(const std::string& hay, const std::string& needle){
+    if (needle.empty()) return -1;
+    auto pos = hay.find(needle);
+    if (pos == std::string::npos) return -1;
+    int proximity = static_cast<int>(std::max<size_t>(0, 100 - pos));
+    int length_bias = static_cast<int>(std::max<int>(0, 50 - std::abs((int)hay.size() - (int)needle.size())));
+    return proximity + length_bias;
+}
+
+std::optional<City> find_best_city_match(const std::vector<City>& cities, const std::string& query){
+    if (cities.empty()) return std::nullopt;
+    if (query.empty()) return std::nullopt;
+    std::string q = query; for(char &c: q) c = (char)std::tolower((unsigned char)c);
+    int bestScore = -1; size_t bestIdx = 0;
+    for(size_t i=0;i<cities.size();++i){
+        std::string s = cities[i].name + ", " + cities[i].country;
+        std::string sl = s; for(char &c: sl) c = (char)std::tolower((unsigned char)c);
+        int sc = score_match(sl, q);
+        if (sc > bestScore){ bestScore = sc; bestIdx = i; }
+    }
+    if (bestScore < 0) return std::nullopt;
+    return cities[bestIdx];
+}
+
+std::optional<City> prompt_city_free_text(const std::vector<City>& cities){
+    if (cities.empty()) return std::nullopt;
+    std::cout << "\nType your city (e.g., Riyadh or Riyadh, Saudi Arabia). Type 'q' to cancel.\n> ";
+    std::string input; if (!std::getline(std::cin, input)) return std::nullopt;
+    std::string t = trim(input);
+    if (t == "" || t == "q" || t == "quit" || t == "exit") return std::nullopt;
+    auto m = find_best_city_match(cities, t);
+    if (!m){
+        std::cout << "Could not find a close match for '" << t << "'.\n";
+        return std::nullopt;
+    }
+    const City &c = *m;
+    std::cout << "Using: " << c.name << ", " << c.country
+              << "  (" << c.lat << ", " << c.lon << ") tz: " << c.tz << "\n";
+    return m;
+}
