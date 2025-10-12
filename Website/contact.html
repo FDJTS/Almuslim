@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Contact — Almuslim</title>
+    <meta name="description" content="Contact the Almuslim project maintainers." />
+    <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./assets/styles.css" />
+  <link rel="canonical" href="https://fdjts.github.io/Almuslim-Website/contact.html" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="./index.html">
+          <img src="./assets/favicon.svg" alt="Almuslim logo" width="28" height="28" />
+          <span id="brand-name">Almuslim</span>
+        </a>
+        <nav class="nav">
+          <a href="./downloads.html">Downloads</a>
+          <a href="./installation.html">Install</a>
+          <a href="./verify.html">Verify</a>
+          <a aria-current="page" href="./contact.html">Contact</a>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <section class="section">
+        <div class="container">
+          <h1>Contact us</h1>
+          <p class="muted">Have a question, bug report, or suggestion? Send us a message.</p>
+          <div class="card">
+            <form action="https://formsubmit.co/fdjts1@gmail.com" method="POST" class="stack gap-14" accept-charset="UTF-8">
+              <input type="hidden" name="_template" value="table" />
+              <input type="hidden" name="_subject" value="Almuslim — Website Contact" />
+              <input type="hidden" name="_captcha" value="true" />
+              <input id="fs-next" type="hidden" name="_next" value="https://fdjts.github.io/Almuslim-Website/contact.html?sent=1" />
+              <!-- Honeypot field -->
+              <input type="text" name="_honey" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" title="Leave this field empty" placeholder="" />
+
+              <label>
+                Your name
+                <input name="name" type="text" required placeholder="John Doe" class="w-100" />
+              </label>
+              <label>
+                Email
+                <input name="email" type="email" required placeholder="john@example.com" class="w-100" />
+              </label>
+              <label>
+                Message
+                <textarea name="message" rows="6" required placeholder="How can we help?" class="w-100"></textarea>
+              </label>
+              <button class="btn btn-primary" type="submit">Send message</button>
+            </form>
+          </div>
+          <p id="contact-status" class="muted"></p>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <span>© <span id="year"></span> <span id="footer-name">Almuslim</span></span>
+      </div>
+    </footer>
+    <script>
+      // Show a small status if redirected back with ?sent=1
+      const params = new URLSearchParams(location.search);
+      const p = document.getElementById('contact-status');
+      if(p && params.get('sent') === '1'){
+        p.textContent = 'Thanks! Your message has been sent.';
+      }
+      // Set FormSubmit _next to this page URL with ?sent=1 (works on any host/subpath)
+      const next = document.getElementById('fs-next');
+      if(next){
+        const base = location.href.split('?')[0];
+        next.value = base + '?sent=1';
+      }
+    </script>
+    <script src="./assets/app.js" defer></script>
+  </body>
+  </html>

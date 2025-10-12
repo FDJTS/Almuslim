@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Installation — Almuslim</title>
+    <meta name="description" content="Installation instructions for Almuslim on Windows, Linux, macOS, and Android." />
+    <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./assets/styles.css" />
+  <link rel="canonical" href="https://fdjts.github.io/Almuslim-Website/installation.html" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="./index.html">
+          <img src="./assets/favicon.svg" alt="Almuslim logo" width="28" height="28" />
+          <span id="brand-name">Almuslim</span>
+        </a>
+        <nav class="nav">
+          <a href="./downloads.html">Downloads</a>
+          <a aria-current="page" href="./installation.html">Install</a>
+          <a href="./verify.html">Verify</a>
+          <a href="./contact.html">Contact</a>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <section class="section">
+        <div class="container">
+          <h1>Install Almuslim</h1>
+          <div class="install-steps">
+            <details open>
+              <summary>Windows</summary>
+              <ol>
+                <li>Download the installer from the <a href="./downloads.html">Downloads</a> page.</li>
+                <li>Run the installer and follow the steps.</li>
+                <li>If SmartScreen appears, choose “More info” → “Run anyway”.</li>
+              </ol>
+            </details>
+            <details>
+              <summary>Linux</summary>
+              <p>Option A: AppImage</p>
+              <pre class="code">chmod +x ./Almuslim-*.AppImage
+./Almuslim-*.AppImage</pre>
+              <p>Option B: Debian/Ubuntu (.deb)</p>
+              <pre class="code">sudo apt install ./almuslim_amd64.deb</pre>
+            </details>
+            <details>
+              <summary>macOS</summary>
+              <ol>
+                <li>Open the .dmg and drag the app to Applications.</li>
+                <li>If blocked, allow it in System Settings → Privacy & Security.</li>
+              </ol>
+            </details>
+            <details>
+              <summary>Android</summary>
+              <ol>
+                <li>Download the APK.</li>
+                <li>Enable install from unknown sources if prompted.</li>
+                <li>Open the APK to install.</li>
+              </ol>
+            </details>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <span>© <span id="year"></span> <span id="footer-name">Almuslim</span></span>
+      </div>
+    </footer>
+    <script src="./assets/app.js" defer></script>
+  </body>
+  </html>

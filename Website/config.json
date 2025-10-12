@@ -1,0 +1,32 @@
+{
+  "name": "Almuslim",
+  "tagline": "Prayer times and Hijri calendar for desktop.",
+  "repo": "#",
+  "downloads": {
+    "windows": {
+      "url": "./downloads/Almuslim-Setup.exe",
+      "label": "Almuslim-Setup.exe",
+      "checksum": "c4ba3ceb32ee97bc0c7233e09fcd03d20c1898abc8a57d3dd0c1133090cb7585"
+    },
+    "linux_appimage": {
+      "url": "#",
+      "label": "Almuslim-x86_64.AppImage",
+      "checksum": ""
+    },
+    "linux_deb": {
+      "url": "#",
+      "label": "almuslim_amd64.deb",
+      "checksum": ""
+    },
+    "macos": {
+      "url": "#",
+      "label": "Almuslim.dmg",
+      "checksum": ""
+    },
+    "android": {
+      "url": "#",
+      "label": "Almuslim.apk",
+      "checksum": ""
+    }
+  }
+}

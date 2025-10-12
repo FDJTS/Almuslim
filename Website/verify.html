@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Verify Downloads — Almuslim</title>
+    <meta name="description" content="Verify Almuslim downloads with SHA256 checksums." />
+    <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./assets/styles.css" />
+  <link rel="canonical" href="https://fdjts.github.io/Almuslim-Website/verify.html" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="./index.html">
+          <img src="./assets/favicon.svg" alt="Almuslim logo" width="28" height="28" />
+          <span id="brand-name">Almuslim</span>
+        </a>
+        <nav class="nav">
+          <a href="./downloads.html">Downloads</a>
+          <a href="./installation.html">Install</a>
+          <a aria-current="page" href="./verify.html">Verify</a>
+          <a href="./contact.html">Contact</a>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <section class="section">
+        <div class="container">
+          <h1>Verify your download</h1>
+          <p class="muted">Compare the checksum of your downloaded file against the value provided below.</p>
+          <div class="grid verify-grid">
+            <div class="card">
+              <h3>Checksums</h3>
+              <ul class="checksums" id="checksums-list"></ul>
+              <details>
+                <summary>How to verify</summary>
+                <p>Windows (PowerShell):</p>
+                <pre class="code">Get-FileHash .\Almuslim-Setup.exe -Algorithm SHA256</pre>
+                <p>Linux/macOS:</p>
+                <pre class="code">shasum -a 256 ./Almuslim-*.AppImage
+shasum -a 256 ./Almuslim.dmg</pre>
+              </details>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <span>© <span id="year"></span> <span id="footer-name">Almuslim</span></span>
+      </div>
+    </footer>
+    <script src="./assets/app.js" defer></script>
+  </body>
+  </html>

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://fdjts.github.io/Almuslim-Website/sitemap.xml
