@@ -1,0 +1,124 @@
+name,country,lat,lon,tz
+# Saudi Arabia
+Riyadh,Saudi Arabia,24.7136,46.6753,+03:00
+Makkah,Saudi Arabia,21.3891,39.8579,+03:00
+Madinah,Saudi Arabia,24.4709,39.6122,+03:00
+Jeddah,Saudi Arabia,21.4858,39.1925,+03:00
+Taif,Saudi Arabia,21.4373,40.5127,+03:00
+Dammam,Saudi Arabia,26.4207,50.0888,+03:00
+Khobar,Saudi Arabia,26.2172,50.1971,+03:00
+Dhahran,Saudi Arabia,26.2361,50.0393,+03:00
+Buraidah,Saudi Arabia,26.3260,43.9740,+03:00
+Hail,Saudi Arabia,27.5114,41.7208,+03:00
+Tabuk,Saudi Arabia,28.3838,36.5662,+03:00
+Abha,Saudi Arabia,18.2252,42.5053,+03:00
+Khamis Mushait,Saudi Arabia,18.3094,42.7662,+03:00
+Jizan,Saudi Arabia,16.8892,42.5700,+03:00
+Najran,Saudi Arabia,17.5650,44.2236,+03:00
+Al Hofuf,Saudi Arabia,25.3647,49.5876,+03:00
+Al Ahsa,Saudi Arabia,25.3833,49.6000,+03:00
+Yanbu,Saudi Arabia,24.0895,38.0618,+03:00
+Al Qassim,Saudi Arabia,26.2075,43.7861,+03:00
+Sakaka,Saudi Arabia,29.9697,40.2064,+03:00
+
+# Egypt
+Cairo,Egypt,30.0444,31.2357,+02:00
+Alexandria,Egypt,31.2001,29.9187,+02:00
+Giza,Egypt,30.0131,31.2089,+02:00
+Mansoura,Egypt,31.0409,31.3785,+02:00
+Tanta,Egypt,30.7865,31.0004,+02:00
+Zagazig,Egypt,30.5877,31.5020,+02:00
+Port Said,Egypt,31.2653,32.3019,+02:00
+Ismailia,Egypt,30.6043,32.2723,+02:00
+Aswan,Egypt,24.0889,32.8998,+02:00
+Luxor,Egypt,25.6872,32.6396,+02:00
+Suez,Egypt,29.9668,32.5498,+02:00
+Fayoum,Egypt,29.3099,30.8418,+02:00
+Damietta,Egypt,31.4175,31.8133,+02:00
+
+# Gulf & Middle East
+Dubai,United Arab Emirates,25.2048,55.2708,+04:00
+Abu Dhabi,United Arab Emirates,24.4539,54.3773,+04:00
+Sharjah,United Arab Emirates,25.3463,55.4209,+04:00
+Doha,Qatar,25.2854,51.5310,+03:00
+Al Wakrah,Qatar,25.1715,51.6034,+03:00
+Kuwait City,Kuwait,29.3759,47.9774,+03:00
+Manama,Bahrain,26.2235,50.5876,+03:00
+Muscat,Oman,23.5859,58.4059,+04:00
+Amman,Jordan,31.9539,35.9106,+03:00
+Jerusalem,Palestine,31.7683,35.2137,+02:00
+Ramallah,Palestine,31.9026,35.1956,+02:00
+Beirut,Lebanon,33.8938,35.5018,+02:00
+Damascus,Syria,33.5138,36.2765,+03:00
+Baghdad,Iraq,33.3152,44.3661,+03:00
+Sana'a,Yemen,15.3694,44.1910,+03:00
+
+# North Africa
+Tunis,Tunisia,36.8065,10.1815,+01:00
+Sfax,Tunisia,34.7406,10.7603,+01:00
+Algiers,Algeria,36.7538,3.0588,+01:00
+Oran,Algeria,35.6971,-0.6308,+01:00
+Casablanca,Morocco,33.5731,-7.5898,+01:00
+Rabat,Morocco,34.0209,-6.8416,+01:00
+Marrakesh,Morocco,31.6295,-7.9811,+01:00
+Tripoli,Libya,32.8872,13.1913,+02:00
+Benghazi,Libya,32.1190,20.0817,+02:00
+Khartoum,Sudan,15.5007,32.5599,+02:00
+
+# Asia
+Istanbul,Turkey,41.0082,28.9784,+03:00
+Ankara,Turkey,39.9208,32.8541,+03:00
+Tehran,Iran,35.6892,51.3890,+03:30
+Isfahan,Iran,32.6546,51.6680,+03:30
+Karachi,Pakistan,24.8607,67.0011,+05:00
+Lahore,Pakistan,31.5204,74.3587,+05:00
+Islamabad,Pakistan,33.6844,73.0479,+05:00
+Kabul,Afghanistan,34.5553,69.2075,+04:30
+New Delhi,India,28.6139,77.2090,+05:30
+Mumbai,India,19.0760,72.8777,+05:30
+Jakarta,Indonesia,-6.2088,106.8456,+07:00
+Kuala Lumpur,Malaysia,3.1390,101.6869,+08:00
+Singapore,Singapore,1.3521,103.8198,+08:00
+Tokyo,Japan,35.6895,139.6917,+09:00
+Seoul,South Korea,37.5665,126.9780,+09:00
+Beijing,China,39.9042,116.4074,+08:00
+Hong Kong,China,22.3193,114.1694,+08:00
+Bangkok,Thailand,13.7563,100.5018,+07:00
+
+# Europe
+London,United Kingdom,51.5074,-0.1278,+00:00
+Manchester,United Kingdom,53.4808,-2.2426,+00:00
+Paris,France,48.8566,2.3522,+01:00
+Berlin,Germany,52.5200,13.4050,+01:00
+Madrid,Spain,40.4168,-3.7038,+01:00
+Rome,Italy,41.9028,12.4964,+01:00
+Amsterdam,Netherlands,52.3676,4.9041,+01:00
+Vienna,Austria,48.2082,16.3738,+01:00
+Zurich,Switzerland,47.3769,8.5417,+01:00
+Athens,Greece,37.9838,23.7275,+02:00
+Warsaw,Poland,52.2297,21.0122,+01:00
+Oslo,Norway,59.9139,10.7522,+01:00
+Stockholm,Sweden,59.3293,18.0686,+01:00
+
+# Americas
+New York,USA,40.7128,-74.0060,-05:00
+Los Angeles,USA,34.0522,-118.2437,-08:00
+Chicago,USA,41.8781,-87.6298,-06:00
+Houston,USA,29.7604,-95.3698,-06:00
+Toronto,Canada,43.651070,-79.347015,-05:00
+Montreal,Canada,45.5017,-73.5673,-05:00
+Vancouver,Canada,49.2827,-123.1207,-08:00
+Mexico City,Mexico,19.4326,-99.1332,-06:00
+Buenos Aires,Argentina,-34.6037,-58.3816,-03:00
+São Paulo,Brazil,-23.5505,-46.6333,-03:00
+Santiago,Chile,-33.4489,-70.6693,-04:00
+
+# Africa & Oceania
+Cape Town,South Africa,-33.9249,18.4241,+02:00
+Nairobi,Kenya,-1.2921,36.8219,+03:00
+Addis Ababa,Ethiopia,9.03,38.74,+03:00
+Accra,Ghana,5.6037,-0.1870,+00:00
+Lagos,Nigeria,6.5244,3.3792,+01:00
+Sydney,Australia,-33.8688,151.2093,+10:00
+Melbourne,Australia,-37.8136,144.9631,+10:00
+Auckland,New Zealand,-36.8485,174.7633,+12:00

@@ -1,0 +1,9 @@
+E:/Zyad/Scripts/Ma shitty projects/Almuslim/Terminal/cpp/build/CMakeFiles/al-muslim.dir
+E:/Zyad/Scripts/Ma shitty projects/Almuslim/Terminal/cpp/build/CMakeFiles/package.dir
+E:/Zyad/Scripts/Ma shitty projects/Almuslim/Terminal/cpp/build/CMakeFiles/package_source.dir
+E:/Zyad/Scripts/Ma shitty projects/Almuslim/Terminal/cpp/build/CMakeFiles/edit_cache.dir
+E:/Zyad/Scripts/Ma shitty projects/Almuslim/Terminal/cpp/build/CMakeFiles/rebuild_cache.dir
+E:/Zyad/Scripts/Ma shitty projects/Almuslim/Terminal/cpp/build/CMakeFiles/list_install_components.dir
+E:/Zyad/Scripts/Ma shitty projects/Almuslim/Terminal/cpp/build/CMakeFiles/install.dir
+E:/Zyad/Scripts/Ma shitty projects/Almuslim/Terminal/cpp/build/CMakeFiles/install/local.dir
+E:/Zyad/Scripts/Ma shitty projects/Almuslim/Terminal/cpp/build/CMakeFiles/install/strip.dir
