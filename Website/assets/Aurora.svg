@@ -1,0 +1,59 @@
+<!-- Aurora logo - icon above, "Aurora" text below -->
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400" role="img" aria-label="Aurora logo">
+  <defs>
+    <!-- aurora gradient -->
+    <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#7DF9FF"/>
+      <stop offset="40%" stop-color="#7AE7A1"/>
+      <stop offset="70%" stop-color="#8A63FF"/>
+      <stop offset="100%" stop-color="#FF7AC6"/>
+    </linearGradient>
+
+    <!-- subtle glow -->
+    <radialGradient id="glow" cx="50%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.55"/>
+      <stop offset="40%" stop-color="#7DF9FF" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- soft blur filter -->
+    <filter id="f1" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="8" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- background (transparent) -->
+
+  <!-- aurora shape: layered waves -->
+  <g transform="translate(200,140)">
+    <!-- glow underlay -->
+    <ellipse cx="0" cy="10" rx="120" ry="45" fill="url(#glow)" opacity="0.9" />
+
+    <!-- wave 1 -->
+    <path d="M-160 40 C -120 -30, -40 -40, 0 -10 C 40 20, 120 10, 160 -20"
+          fill="none" stroke="url(#g1)" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" filter="url(#f1)" opacity="0.95"/>
+
+    <!-- wave 2 (slightly offset, thinner) -->
+    <path d="M-150 60 C -110 -5, -30 -20, 0 5 C 30 30, 110 25, 150 -5"
+          fill="none" stroke="url(#g1)" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" opacity="0.95"/>
+
+    <!-- small sparkle circles -->
+    <circle cx="-70" cy="-10" r="4" fill="#fff" opacity="0.9"/>
+    <circle cx="60" cy="10" r="3" fill="#fff" opacity="0.8"/>
+  </g>
+
+  <!-- brand name -->
+  <g transform="translate(200,300)">
+    <text x="0" y="0" text-anchor="middle"
+          style="font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+                 font-weight: 600; font-size: 40px; letter-spacing: 0.6px; fill: #0F172A;">
+      Aurora
+    </text>
+    <!-- subtitle / optional: remove if you don't want -->
+    <!-- <text x="0" y="28" text-anchor="middle" style="font-family: Roboto, Arial; font-weight:400; font-size:12px; fill:#6b7280">Creative Studio</text> -->
+  </g>
+</svg>

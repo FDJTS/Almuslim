@@ -57,8 +57,10 @@
     el('app-title').textContent = cfg.name || 'Almuslim';
     if(cfg.tagline) el('app-tagline').textContent = cfg.tagline;
     const year = new Date().getFullYear();
-    el('year').textContent = String(year);
-    el('footer-name').textContent = cfg.name || 'Almuslim';
+  const yearEl = el('year');
+  if(yearEl) yearEl.textContent = String(year);
+  const footerNameEl = el('footer-name');
+  if(footerNameEl) footerNameEl.textContent = cfg.name || 'Almuslim';
     const repoLink = el('repo-link');
     if(repoLink && cfg.repo){ repoLink.href = cfg.repo; }
 
@@ -69,8 +71,11 @@
       if(item && item.url && item.url !== '#'){
         a.href = item.url;
         a.textContent = a.textContent.replace('Download', `Download (${item.label||'latest'})`);
+        a.setAttribute('aria-disabled','false');
+        a.classList.remove('disabled');
       }else{
         a.classList.add('disabled');
+        a.setAttribute('aria-disabled','true');
         a.href = '#downloads';
         a.textContent = 'Coming soon';
       }
@@ -99,7 +104,7 @@
       if(osLabel) osLabel.textContent = `Download for ${os.charAt(0).toUpperCase()+os.slice(1)}`;
       if(hintEl && target.label){ hintEl.textContent = `File: ${target.label}`; }
     }else{
-      primary.href = '#downloads';
+      primary.href = './downloads.html';
       if(osLabel) osLabel.textContent = 'View all downloads';
     }
 
@@ -117,7 +122,8 @@
       for(const [name, item] of items){
         if(!item || (!item.checksum && !item.label)) continue;
         const li = document.createElement('li');
-        li.innerHTML = `<strong>${name}</strong>: ${item.label ? `<code>${item.label}</code>` : ''} ${item.checksum ? `— SHA256 <code>${item.checksum}</code>` : ''}`;
+        const checksumHtml = item.checksum ? `— SHA256 <code>${item.checksum}</code> <button class="btn btn-outline copy-btn" data-copy="${item.checksum}">Copy</button>` : '';
+        li.innerHTML = `<strong>${name}</strong>: ${item.label ? `<code>${item.label}</code>` : ''} ${checksumHtml}`;
         list.appendChild(li);
       }
       if(!list.children.length){
@@ -126,9 +132,46 @@
         li.textContent = 'No checksums provided.';
         list.appendChild(li);
       }
+      // Copy buttons
+      $$(".copy-btn").forEach(btn=>{
+        btn.addEventListener('click', async (e)=>{
+          e.preventDefault();
+          const text = btn.getAttribute('data-copy')||'';
+          try{ await navigator.clipboard.writeText(text); showToast('Checksum copied'); }
+          catch{ showToast('Copy failed'); }
+        });
+      });
     }
+
+    // Active nav link based on location
+    $$('nav a').forEach(a=>{
+      if(a.getAttribute('href') && location.pathname.endsWith(a.getAttribute('href').replace('./',''))){
+        a.setAttribute('aria-current','page');
+      }
+    });
+
+    // Highlight OS card on downloads page
+    const osMap = { windows:'[data-os="windows"]', linux:'[data-os="linux"]', macos:'[data-os="macos"]', android:'[data-os="android"]' };
+    const sel = osMap[detectOS()];
+    if(sel){ const card = document.querySelector(sel); if(card) card.classList.add('is-highlighted'); }
   }
 
   // Init
-  window.addEventListener('DOMContentLoaded', loadConfig);
+  function showToast(msg){
+    let t = document.querySelector('.toast');
+    if(!t){ t = document.createElement('div'); t.className = 'toast'; document.body.appendChild(t); }
+    t.textContent = msg; t.classList.add('show');
+    setTimeout(()=>t.classList.remove('show'), 1500);
+  }
+
+  function initMenu(){
+    const toggle = document.getElementById('menu-toggle');
+    const nav = document.querySelector('header .nav');
+    if(!toggle || !nav) return;
+    toggle.addEventListener('click', ()=>{
+      nav.classList.toggle('open');
+    });
+  }
+
+  window.addEventListener('DOMContentLoaded', ()=>{ initMenu(); loadConfig(); });
 })();
