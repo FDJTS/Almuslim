@@ -20,27 +20,29 @@ Option A — Installer (recommended for users):
 
 1) Download Almuslim‑Setup‑X.Y.Z.exe from GitHub Releases (or from your CI if configured).
 2) Double‑click to install. The installer creates Start Menu entries:
-   - Almuslim — runs the app
-   - Almuslim (Setup City) — opens the city selector once and saves your config
+  - Almuslim — runs the app
+  - Almuslim (Setup City) — opens the city selector once and saves your config
 3) After install, press the Windows key and type “Almuslim”.
 
 Option B — Build and run from source:
 
 1) Prereqs: CMake 3.16+, and one of: Visual Studio (MSVC), LLVM/Clang + Ninja, or MinGW‑w64 (g++ + mingw32‑make).
 2) From the repo root in PowerShell:
-   - cd Terminal/Windows
-   - ./build.ps1 -Release
-   - .\run.cmd  --setup
+  - cd Terminal/Windows
+  - ./build.ps1 -Release
+  - .\run.cmd  --setup
 
-The .\run.cmd script finds and runs the built al-muslim.exe without needing PowerShell.
+Notes:
+- The .\run.cmd script finds and runs the built al-muslim.exe without needing PowerShell.
+- The .\run.ps1 script also works and accepts CLI flags.
 
 
 ## Quick start (macOS / Linux)
 
 1) Prereqs: CMake 3.16+, Clang/GCC.
 2) From the repo root:
-   - macOS: cd Terminal/MacOS && chmod +x build.sh run.sh && ./build.sh && ./run.sh --setup
-   - Linux: cd Terminal/Linux && chmod +x build.sh run.sh && ./build.sh && ./run.sh --setup
+  - macOS: cd Terminal/MacOS && chmod +x build.sh run.sh && ./build.sh && ./run.sh --setup
+  - Linux: cd Terminal/Linux && chmod +x build.sh run.sh && ./build.sh && ./run.sh --setup
 
 
 ## Usage
@@ -48,6 +50,12 @@ The .\run.cmd script finds and runs the built al-muslim.exe without needing Powe
 - First run: al-muslim --setup to select your city and save config.
 - Normal run: al-muslim
 - Output shows today’s times and the next‑prayer countdown.
+
+CLI flags:
+- --setup: interactive first-time configuration
+- --ask: choose city on each launch
+- --week: print next 7 days in console
+- --week-csv <path>: also write a CSV for next 7 days
 
 Config file location:
 - Windows: %USERPROFILE%\.al-muslim\config.toml
@@ -132,6 +140,7 @@ Binaries are placed under Terminal/cpp/build (and possibly build/Release when us
 - Inno Setup not found: install from https://jrsoftware.org/isdl.php and make sure ISCC.exe is on PATH, or let CI build it.
 - Timezone looks off: set timezone to a numeric offset like "+03:00" in config, or ensure system timezone matches your city.
 - High latitudes: try high_latitude_rule = "seventh_of_the_night" or "twilight_angle".
+- Windows console: the app enables UTF‑8 and ANSI colors automatically when supported.
 
 
 ## Contributing
@@ -142,4 +151,3 @@ Small, focused PRs are welcome. Please include a brief description and update do
 ## License
 
 MIT — see LICENSE.
-
