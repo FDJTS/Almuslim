@@ -375,6 +375,12 @@ int main(int argc, char** argv) {
         if (argc > 1 && std::string(argv[1]) == "--setup"){
             fs::path exeDir = fs::path(argv[0]).parent_path();
             fs::path dataDir = exeDir / "data";
+#if !defined(_WIN32)
+            if (!fs::exists(dataDir / "cities.csv")) {
+                fs::path sysData = "/usr/share/almuslim/data";
+                if (fs::exists(sysData / "cities.csv")) dataDir = sysData;
+            }
+#endif
             auto cities = load_cities(dataDir);
             if (cities.empty()){
                 std::cout << "No cities database found at " << (dataDir/"cities.csv").string() << "\n";
@@ -442,6 +448,12 @@ int main(int argc, char** argv) {
         if (askEveryLaunch || city == "(unset)" || latS.empty() || lonS.empty()){
             fs::path exeDir = fs::path(argv[0]).parent_path();
             fs::path dataDir = exeDir / "data";
+#if !defined(_WIN32)
+            if (!fs::exists(dataDir / "cities.csv")) {
+                fs::path sysData = "/usr/share/almuslim/data";
+                if (fs::exists(sysData / "cities.csv")) dataDir = sysData;
+            }
+#endif
             auto cities = load_cities(dataDir);
             if (!cities.empty()){
                 auto chosen = prompt_city_free_text(cities);
@@ -514,8 +526,14 @@ int main(int argc, char** argv) {
         PrayerTimes pt = *ptOpt;
 
         // Hijri date: prefer precise table if available
-        fs::path exeDir = fs::path(argv[0]).parent_path();
-        fs::path dataDir = exeDir / "data";
+    fs::path exeDir = fs::path(argv[0]).parent_path();
+    fs::path dataDir = exeDir / "data";
+#if !defined(_WIN32)
+    if (!fs::exists(dataDir / "hijri/umm_al_qura_month_starts.csv")) {
+        fs::path sysData = "/usr/share/almuslim/data";
+        if (fs::exists(sysData / "hijri/umm_al_qura_month_starts.csv")) dataDir = sysData;
+    }
+#endif
     static bool hjLoaded = hijri::load_umm_al_qura(dataDir);
         std::string hijriStr;
         if (hjLoaded){

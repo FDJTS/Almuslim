@@ -32,6 +32,11 @@ add_executable(al-muslim
 # Install rules
 install(TARGETS al-muslim RUNTIME DESTINATION bin)
 
+# Install data files for packaging (Linux FHS)
+if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/data")
+  install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/data" DESTINATION share/almuslim)
+endif()
+
 # Default install prefix hint
 if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
   if(WIN32)
@@ -48,3 +53,12 @@ if (EXISTS "${ALMUSLIM_DATA_DIR}")
             "$<TARGET_FILE_DIR:al-muslim>/data"
     COMMENT "Copying data directory to output")
 endif()
+
+# Basic CPack setup for .deb creation on Linux
+set(CPACK_PACKAGE_NAME "almuslim")
+set(CPACK_PACKAGE_VENDOR "Almuslim")
+set(CPACK_PACKAGE_CONTACT "maintainer@example.com")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Fast terminal prayer times")
+set(CPACK_PACKAGE_VERSION "${PROJECT_VERSION}")
+set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Almuslim")
+include(CPack)
